@@ -28,6 +28,9 @@ const BLOG = {
   isPreviewImageSupportEnabled: false,
   notionPageId: process.env.NOTION_PAGE_ID, // DO NOT CHANGE THIS！！！
   notionAccessToken: process.env.NOTION_ACCESS_TOKEN, // Useful if you prefer not to make your database public
+  cusdisAppId: process.env.CUSDIS_APP_ID,
+  gitalkClientID: process.env.GITALK_CLIENT_ID,
+  gitalkClientSecret: process.env.GITALK_CLIENT_SECRET,
   analytics: {
     providers: [], // Currently we support Google Analytics and Ackee, please fill with 'ga' or '', leave it empty to disable it.
     ackeeConfig: {
@@ -42,30 +45,31 @@ const BLOG = {
       id: ''
     }
   },
-  comment: {
-    // support provider: gitalk, utterances, cusdis
-    provider: 'cusdis', // leave it empty if you don't need any comment plugin
-    gitalkConfig: {
-      repo: 'blog', // The repository of store comments
-      owner: 'potato1949',
-      admin: ['potato1949'],
-      clientID: '',
-      clientSecret: '',
-      distractionFreeMode: false,
-      proxy:
-        'https://proxy.rustc.cloud/?https://github.com/login/oauth/access_token'
-    },
-    utterancesConfig: {
-      repo: ''
-    },
-    cusdisConfig: {
-      appId: '', // data-app-id
-      host: 'https://cusdis.com', // data-host, change this if you're using self-hosted version
-      scriptSrc: 'https://cusdis.com/js/cusdis.umd.js', // change this if you're using self-hosted version
-      autoApproval: true // auto approval comments
-    }
-  },
   isProd: process.env.VERCEL_ENV === 'production' // distinguish between development and production environment (ref: https://vercel.com/docs/environment-variables#system-environment-variables)
 }
+
+BLOG.comment = {
+  // support provider: gitalk, utterances, cusdis
+  provider: 'cusdis', // leave it empty if you don't need any comment plugin
+  gitalkConfig: {
+    repo: 'blog', // The repository of store comments
+        owner: 'potato1949',
+        admin: ['potato1949'],
+        clientID: BLOG.gitalkClientID,
+        clientSecret: BLOG.gitalkClientSecret,
+        distractionFreeMode: false,
+        proxy: 'https://proxy.rustc.cloud/?https://github.com/login/oauth/access_token'
+  },
+  utterancesConfig: {
+    repo: ''
+  },
+  cusdisConfig: {
+    appId: BLOG.cusdisAppId, // data-app-id
+        host: 'https://cusdis.com', // data-host, change this if you're using self-hosted version
+        scriptSrc: 'https://cusdis.com/js/cusdis.umd.js', // change this if you're using self-hosted version
+        autoApproval: true // auto approval comments
+  }
+}
+
 // export default BLOG
 module.exports = BLOG
