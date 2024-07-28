@@ -4,6 +4,7 @@ import { useTheme } from 'next-themes'
 import dynamic from 'next/dynamic'
 import { ReactCusdis } from 'react-cusdis'
 import { useRouter } from 'next/router'
+import Giscus from '@giscus/react'
 
 const GitalkComponent = dynamic(
   () => {
@@ -61,6 +62,15 @@ const Comments = ({ frontMatter }) => {
             pageUrl: BLOG.link + router.asPath,
             theme: 'auto'
           }}
+        />
+      )}
+      {BLOG.comment && BLOG.comment.provider === 'giscus' && (
+        <Giscus
+          repo='potato1949/blog'
+          repoId='R_kgDOMbySHA'
+          category='Announcements'
+          categoryId='DIC_kwDOMbySHM4ChPSA'
+          mapping='pathname'
         />
       )}
     </div>

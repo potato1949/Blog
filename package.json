@@ -22,6 +22,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@giscus/react": "^3.0.0",
     "@notionhq/client": "^2.2.15",
     "autosize": "^6.0.1",
     "classnames": "^2.5.1",

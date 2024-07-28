@@ -28,9 +28,10 @@ const BLOG = {
   isPreviewImageSupportEnabled: false,
   notionPageId: process.env.NOTION_PAGE_ID, // DO NOT CHANGE THIS！！！
   notionAccessToken: process.env.NOTION_ACCESS_TOKEN, // Useful if you prefer not to make your database public
-  cusdisAppId: process.env.CUSDIS_APP_ID,
   gitalkClientID: process.env.GITALK_CLIENT_ID,
   gitalkClientSecret: process.env.GITALK_CLIENT_SECRET,
+  giscusRepoId: process.env.GISCUS_REPO_ID,
+  giscusCategoryId: process.env.GISCUS_CATEGORY_ID,
   analytics: {
     providers: [], // Currently we support Google Analytics and Ackee, please fill with 'ga' or '', leave it empty to disable it.
     ackeeConfig: {
@@ -49,22 +50,22 @@ const BLOG = {
 }
 
 BLOG.comment = {
-  // support provider: gitalk, utterances, cusdis
-  provider: 'cusdis', // leave it empty if you don't need any comment plugin
+  // support provider: gitalk, utterances, cusdis, giscus
+  provider: 'giscus', // leave it empty if you don't need any comment plugin
   gitalkConfig: {
     repo: 'blog', // The repository of store comments
-        owner: 'potato1949',
-        admin: ['potato1949'],
-        clientID: BLOG.gitalkClientID,
-        clientSecret: BLOG.gitalkClientSecret,
+        owner: '',
+        admin: [''],
+        clientID: '',
+        clientSecret: '',
         distractionFreeMode: false,
-        proxy: 'https://proxy.rustc.cloud/?https://github.com/login/oauth/access_token'
+        proxy: ''
   },
   utterancesConfig: {
     repo: ''
   },
   cusdisConfig: {
-    appId: BLOG.cusdisAppId, // data-app-id
+    appId: '349ea56f-3b8c-4017-a1be-49415221cf42', // data-app-id
         host: 'https://cusdis.com', // data-host, change this if you're using self-hosted version
         scriptSrc: 'https://cusdis.com/js/cusdis.umd.js', // change this if you're using self-hosted version
         autoApproval: true // auto approval comments
