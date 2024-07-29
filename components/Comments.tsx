@@ -1,5 +1,5 @@
 import BLOG from '@/blog.config'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react' // 添加useState
 import { useTheme } from 'next-themes'
 import dynamic from 'next/dynamic'
 import { ReactCusdis } from 'react-cusdis'
@@ -22,14 +22,15 @@ const UtterancesComponent = dynamic(
 const Comments = ({ frontMatter }) => {
   const router = useRouter()
   const { theme } = useTheme()
-
+  const [giscusTheme, setGiscusTheme] = useState('light')
   const cusdisTheme = theme === 'dark' ? 'dark' : 'light'
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.CUSDIS) {
       window.CUSDIS.setTheme(cusdisTheme)
     }
-  }, [cusdisTheme])
+    setGiscusTheme(theme === 'dark' ? 'transparent_dark' : 'light') // 根据你的主题设置，可能需要调整这里的值
+  }, [cusdisTheme, theme])
 
   return (
     <div>
@@ -71,6 +72,7 @@ const Comments = ({ frontMatter }) => {
           category='Announcements'
           categoryId='DIC_kwDOMbySHM4ChPSA'
           mapping='pathname'
+          theme={giscusTheme}
         />
       )}
     </div>
